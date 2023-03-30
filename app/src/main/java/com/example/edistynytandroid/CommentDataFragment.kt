@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -22,6 +23,11 @@ class CommentDataFragment : Fragment() {
 
     // This property is only valid between onCreateView and // onDestroyView.
     private val binding get() = _binding!!
+
+    // alustetaan viittaus adapteriin sekä luodaan LinearLayoutManager
+// RecyclerView tarvitsee jonkin LayoutManagerin, joista yksinkertaisin on Linear
+    private lateinit var adapter: CommentAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +40,9 @@ class CommentDataFragment : Fragment() {
         binding.buttonGetComments.setOnClickListener {
             getComments()
         }
+
+        linearLayoutManager = LinearLayoutManager(context)
+        binding.recyclerViewComments.layoutManager = linearLayoutManager
 
         return root
     }
@@ -55,11 +64,13 @@ class CommentDataFragment : Fragment() {
 
                 var rows : List<Comment> = gson.fromJson(response, Array<Comment>::class.java).toList()
 
+                adapter = CommentAdapter(rows)
+                binding.recyclerViewComments.adapter = adapter
+
+
                 Log.d("TESTI", "Kommenttien määrä: " + rows.size)
 
-                for(item: Comment in rows) {
-                    Log.d("TESTI", item.email.toString())
-                }
+
             },
             Response.ErrorListener {
                 // typically this is a connection error
@@ -67,6 +78,8 @@ class CommentDataFragment : Fragment() {
 
 
             })
+
+
         {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
@@ -77,6 +90,8 @@ class CommentDataFragment : Fragment() {
                 headers["Content-Type"] = "application/json; charset=utf-8"
                 return headers
             }
+
+
         }
 
         // Add the request to the RequestQueue. This has to be done in both getting and sending new data.
