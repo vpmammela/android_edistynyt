@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -14,7 +13,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.edistynytandroid.databinding.FragmentCommentDataBinding
-import com.example.edistynytandroid.databinding.FragmentDataBinding
+import com.example.edistynytandroid.datatypes.comment.Comment
 import com.google.gson.GsonBuilder
 
 

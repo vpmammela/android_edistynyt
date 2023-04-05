@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edistynytandroid.databinding.RecyclerViewItemBinding
+import com.example.edistynytandroid.datatypes.comment.Comment
 
 // aloitetaan luomalla uusi luokka CommentHolder
 class CommentAdapter(private val comments: List<Comment>) : RecyclerView.Adapter<CommentAdapter.CommentHolder>() {
