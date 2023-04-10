@@ -25,5 +25,8 @@
         <item
             android:id="@+id/mapsFragment"
             android:title="Google maps test" />
+        <item
+            android:id="@+id/toDoDataFragment"
+            android:title="Harjoitus 1" />
     </group>
 </menu>
