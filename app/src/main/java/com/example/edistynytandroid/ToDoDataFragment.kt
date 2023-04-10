@@ -28,7 +28,7 @@ class ToDoDataFragment : Fragment() {
 
     // alustetaan viittaus adapteriin sekä luodaan LinearLayoutManager
 // RecyclerView tarvitsee jonkin LayoutManagerin, joista yksinkertaisin on Linear
-    private lateinit var adapter: CommentAdapter
+    private lateinit var adapter: ToDoAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +38,9 @@ class ToDoDataFragment : Fragment() {
         _binding = FragmentToDoDataBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
+
+        linearLayoutManager = LinearLayoutManager(context)
+        binding.recyclerViewToDo.layoutManager = linearLayoutManager
 
         binding.buttonGetTodos.setOnClickListener {
             getTodos()
@@ -65,6 +68,9 @@ class ToDoDataFragment : Fragment() {
                 // we can use GSON to modify this response into something more usable
                 Log.d("TESTI", response)
                 var rows : List<Todo> = gson.fromJson(response, Array<Todo>::class.java).toList()
+
+                adapter = ToDoAdapter(rows)
+                binding.recyclerViewToDo.adapter = adapter
 
                 for (item: Todo in rows) {
                     Log.d("TESTI", "Title: " + item.title)
