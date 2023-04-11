@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.edistynytandroid.databinding.FragmentMapsBinding
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -86,10 +87,24 @@ class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
-        Log.d("TESTI", "marker click")
+        Log.d("TESTI", "Marker CLICK!")
+
+        // klikatun markerin koordinaatit löytyvät p0-muuttujan positionista:
         Log.d("TESTI", p0.position.latitude.toString())
         Log.d("TESTI", p0.position.longitude.toString())
+
+        // jos markerilla on tagi, tällä tavalla sen saa haettua siitä
         Log.d("TESTI", p0.tag.toString())
+
+        // tallennetaan koordinaatit apumuuttujiin selkeyden vuoksi
+        val lat = p0.position.latitude.toFloat()
+        val lon = p0.position.longitude.toFloat()
+
+        // actionin avulla siirrytään CityWeatherFragmentiin ja lähetetään
+        // tarvittavat koordinaatit parametreina
+        val action = MapsFragmentDirections.actionMapsFragmentToCityWeatherFragment(lat, lon)
+        findNavController().navigate(action)
+
         return false
     }
 }

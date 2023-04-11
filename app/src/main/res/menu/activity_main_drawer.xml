@@ -28,5 +28,9 @@
         <item
             android:id="@+id/toDoDataFragment"
             android:title="Harjoitus 1" />
+
+        <item
+            android:id="@+id/openStreetMapsFragment"
+            android:title="OSM test" />
     </group>
 </menu>
