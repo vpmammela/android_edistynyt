@@ -32,5 +32,11 @@
         <item
             android:id="@+id/openStreetMapsFragment"
             android:title="OSM test" />
+        <item
+            android:id="@+id/feedbackReadFragment"
+            android:title="Feedback Read" />
+        <item
+            android:id="@+id/feedbackSendFragment"
+            android:title="Feedback Send" />
     </group>
 </menu>

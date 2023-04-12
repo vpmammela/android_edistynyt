@@ -91,4 +91,14 @@
         android:name="com.example.edistynytandroid.OpenStreetMapsFragment"
         android:label="fragment_open_street_maps"
         tools:layout="@layout/fragment_open_street_maps" />
+    <fragment
+        android:id="@+id/feedbackReadFragment"
+        android:name="com.example.edistynytandroid.FeedbackReadFragment"
+        android:label="fragment_feedback_read"
+        tools:layout="@layout/fragment_feedback_read" />
+    <fragment
+        android:id="@+id/feedbackSendFragment"
+        android:name="com.example.edistynytandroid.FeedbackSendFragment"
+        android:label="fragment_feedback_send"
+        tools:layout="@layout/fragment_feedback_send" />
 </navigation>
