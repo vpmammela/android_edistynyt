@@ -73,7 +73,11 @@
         android:id="@+id/toDoDataFragment"
         android:name="com.example.edistynytandroid.ToDoDataFragment"
         android:label="fragment_to_do_data"
-        tools:layout="@layout/fragment_to_do_data" />
+        tools:layout="@layout/fragment_to_do_data" >
+        <action
+            android:id="@+id/action_toDoDataFragment_to_todoDetailFragment"
+            app:destination="@id/todoDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cityWeatherFragment"
         android:name="com.example.edistynytandroid.CityWeatherFragment"
@@ -101,4 +105,26 @@
         android:name="com.example.edistynytandroid.FeedbackSendFragment"
         android:label="fragment_feedback_send"
         tools:layout="@layout/fragment_feedback_send" />
+    <fragment
+        android:id="@+id/todoDetailFragment"
+        android:name="com.example.edistynytandroid.TodoDetailFragment"
+        android:label="fragment_todo_detail"
+        tools:layout="@layout/fragment_todo_detail" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="userId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="-1" />
+        <argument
+            android:name="completed"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
 </navigation>
