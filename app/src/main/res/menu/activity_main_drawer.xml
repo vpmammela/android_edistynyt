@@ -24,14 +24,14 @@
             android:title="Comment API" />
         <item
             android:id="@+id/mapsFragment"
-            android:title="Google maps test" />
+            android:title="Google maps (Harjoitus 2)" />
         <item
             android:id="@+id/toDoDataFragment"
             android:title="Harjoitus 1" />
 
         <item
             android:id="@+id/openStreetMapsFragment"
-            android:title="OSM test" />
+            android:title="OSM (harjoitus 2 lisätehtävä)" />
         <item
             android:id="@+id/feedbackReadFragment"
             android:title="Feedback Read" />

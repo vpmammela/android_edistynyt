@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.edistynytandroid.databinding.FragmentOpenStreetMapsBinding
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.config.Configuration.*
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.overlay.Marker
 
 
@@ -55,8 +57,45 @@ class OpenStreetMapsFragment : Fragment() {
         binding.map.overlays.add(firstMarker)
         binding.map.invalidate()
 
+
+        binding.checkBoxZoomControlsOSM.setOnCheckedChangeListener { compoundButton, b ->
+            if (compoundButton.isChecked) {
+                binding.map.zoomController.activate()
+                binding.map.zoomController.setVisibility(CustomZoomButtonsController.Visibility.ALWAYS)
+                binding.map.zoomController.setZoomInEnabled(true)
+                binding.map.zoomController.setZoomOutEnabled(true)
+            } else {
+                binding.map.zoomController.setZoomInEnabled(false)
+                binding.map.zoomController.setZoomOutEnabled(false)
+                binding.map.zoomController.setVisibility(CustomZoomButtonsController.Visibility.NEVER)
+            }
+        }
+
+        binding.radioButtonMapNormalOSM.setOnCheckedChangeListener { compoundButton, b ->
+            if(compoundButton.isChecked) {
+                binding.map.setTileSource(TileSourceFactory.MAPNIK)
+            }
+        }
+
+        binding.radioButtonMapSatelliteOSM.setOnCheckedChangeListener { compoundButton, b ->
+            if(compoundButton.isChecked) {
+                binding.map.setTileSource(TileSourceFactory.USGS_SAT)
+            }
+        }
+
+        binding.radioButtonMapTerrainOSM.setOnCheckedChangeListener { compoundButton, b ->
+            if(compoundButton.isChecked) {
+                binding.map.setTileSource(TileSourceFactory.USGS_TOPO)
+            }
+        }
+
         firstMarker.setOnMarkerClickListener { marker, mapView ->
             Log.d("TESTI", "Marker click")
+            Log.d("TESTI", "lon: " + marker.position.longitude.toString())
+            Log.d("TESTI", "lat: " + marker.position.latitude.toString())
+
+            val activity = OpenStreetMapsFragmentDirections.actionOpenStreetMapsFragmentToCityWeatherFragment(marker.position.latitude.toFloat(), marker.position.longitude.toFloat())
+            findNavController().navigate(activity)
             return@setOnMarkerClickListener false
         }
 

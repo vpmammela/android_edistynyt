@@ -94,7 +94,11 @@
         android:id="@+id/openStreetMapsFragment"
         android:name="com.example.edistynytandroid.OpenStreetMapsFragment"
         android:label="fragment_open_street_maps"
-        tools:layout="@layout/fragment_open_street_maps" />
+        tools:layout="@layout/fragment_open_street_maps" >
+        <action
+            android:id="@+id/action_openStreetMapsFragment_to_cityWeatherFragment"
+            app:destination="@id/cityWeatherFragment" />
+    </fragment>
     <fragment
         android:id="@+id/feedbackReadFragment"
         android:name="com.example.edistynytandroid.FeedbackReadFragment"

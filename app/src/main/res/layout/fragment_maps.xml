@@ -48,6 +48,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hybrid" />
+
+        <RadioButton
+            android:id="@+id/radioButton_map_terrain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Terrain" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

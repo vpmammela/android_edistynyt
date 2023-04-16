@@ -12,7 +12,6 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.edistynytandroid.databinding.FragmentCommentDetailBinding
 import com.example.edistynytandroid.databinding.FragmentTodoDetailBinding
 import com.example.edistynytandroid.datatypes.todo.Todo
 import com.example.edistynytandroid.datatypes.user.User
@@ -36,11 +35,8 @@ class TodoDetailFragment : Fragment() {
         _binding = FragmentTodoDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.textViewTodoId.text = args.id.toString()
-        binding.textViewTodoTitle.text = args.title
-        binding.textViewTodoCompleted.text = args.completed.toString()
-
         getUser()
+        getTodo()
 
         return root
     }
@@ -88,4 +84,43 @@ class TodoDetailFragment : Fragment() {
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(stringRequest)
     }
-}
+
+    fun getTodo() {
+        val JSON_URL = "https://jsonplaceholder.typicode.com/todos/" + args.id.toString()
+
+        val gson = GsonBuilder().setPrettyPrinting().create()
+
+        val stringRequest: StringRequest = object : StringRequest(
+            Request.Method.GET, JSON_URL,
+            Response.Listener { response ->
+
+                var item : Todo = gson.fromJson(response, Todo::class.java)
+
+                binding.textViewTodoTitle.text = item.title.toString()
+                binding.textViewTodoId.text = args.id.toString()
+                binding.textViewTodoCompleted.text = item.completed.toString()
+
+
+            },
+            Response.ErrorListener {
+                // typically this is a connection error
+                Log.d("TESTI", it.toString())
+            })
+        {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+
+                // basic headers for the data
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Content-Type"] = "application/json; charset=utf-8"
+                return headers
+            }
+        }
+
+        // Add the request to the RequestQueue. This has to be done in both getting and sending new data.
+        // if using this in an activity, use "this" instead of "context"
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
+    }
+    }

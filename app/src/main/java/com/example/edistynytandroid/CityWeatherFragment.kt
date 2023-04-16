@@ -26,6 +26,7 @@ class CityWeatherFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +44,6 @@ class CityWeatherFragment : Fragment() {
     }
 
     fun getWeatherData() {
-        // this is the url where we want to get our data from
 
         // haetaan local.properties -tiedostosta muuttuja
         val API_KEY = BuildConfig.OPENWEATHER_API_KEY
@@ -62,10 +62,12 @@ class CityWeatherFragment : Fragment() {
                 Log.d("TESTI", response)
                 var item : CityWeather = gson.fromJson(response, CityWeather::class.java)
 
-                val temperature = item.main?.temp
-                val humidity = item.main?.humidity
 
-                Log.d("TESTI", "lämpötila: ${temperature}C, kosteusprosentti: ${humidity}%")
+                binding.textViewWeatherCityName.text = item.name.toString()
+                binding.textViewWeatherTemperature.text = item.main?.temp.toString() + " C"
+                binding.textViewWeatherHumidity.text = item.main?.humidity.toString() + " %"
+                binding.textViewWeatherWindSpeed.text = item.wind?.speed.toString() + " m/s"
+
 
             },
             Response.ErrorListener {

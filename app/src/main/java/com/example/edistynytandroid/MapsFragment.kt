@@ -36,7 +36,7 @@ class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         gMap = googleMap
 
         // tehdään sydney marker
-        val sydney = LatLng(-34.0, 151.0)
+        val sydney = LatLng(-33.86833079928604, 151.21346536937173)
         var m1 = googleMap.addMarker(MarkerOptions().position(sydney).title("Sydney"))
         m1?.tag = "Sydney"
 
@@ -74,6 +74,12 @@ class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         binding.radioButtonMapHybrid.setOnCheckedChangeListener { compoundButton, b ->
             if(compoundButton.isChecked) {
                 gMap.mapType = GoogleMap.MAP_TYPE_HYBRID
+            }
+        }
+
+        binding.radioButtonMapTerrain.setOnCheckedChangeListener { compoundButton, b ->
+            if(compoundButton.isChecked) {
+                gMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
             }
         }
 
