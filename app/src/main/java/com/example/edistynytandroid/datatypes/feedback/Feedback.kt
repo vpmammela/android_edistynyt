@@ -11,3 +11,8 @@ data class Feedback (
   @SerializedName("value"    ) var value    : String? = null
 
 )
+{
+  override fun toString(): String {
+    return "${name}: ${location}"
+  }
+}

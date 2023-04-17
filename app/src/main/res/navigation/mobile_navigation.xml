@@ -108,7 +108,11 @@
         android:id="@+id/feedbackSendFragment"
         android:name="com.example.edistynytandroid.FeedbackSendFragment"
         android:label="fragment_feedback_send"
-        tools:layout="@layout/fragment_feedback_send" />
+        tools:layout="@layout/fragment_feedback_send" >
+        <action
+            android:id="@+id/action_feedbackSendFragment_to_feedbackReadFragment"
+            app:destination="@id/feedbackReadFragment" />
+    </fragment>
     <fragment
         android:id="@+id/todoDetailFragment"
         android:name="com.example.edistynytandroid.TodoDetailFragment"
