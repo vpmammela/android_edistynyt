@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.dataFragment,
                 R.id.commentDataFragment, R.id.mapsFragment, R.id.toDoDataFragment, R.id.openStreetMapsFragment,
-                R.id.feedbackReadFragment, R.id.feedbackSendFragment
+                R.id.feedbackReadFragment, R.id.feedbackSendFragment, R.id.weatherStationFragment
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

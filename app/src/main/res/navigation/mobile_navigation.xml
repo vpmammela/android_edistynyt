@@ -135,4 +135,9 @@
             app:argType="boolean"
             android:defaultValue="false" />
     </fragment>
+    <fragment
+        android:id="@+id/weatherStationFragment"
+        android:name="com.example.edistynytandroid.WeatherStationFragment"
+        android:label="fragment_weather_station"
+        tools:layout="@layout/fragment_weather_station" />
 </navigation>

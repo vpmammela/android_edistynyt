@@ -38,5 +38,8 @@
         <item
             android:id="@+id/feedbackSendFragment"
             android:title="Feedback Send" />
+        <item
+            android:id="@+id/weatherStationFragment"
+            android:title="Weather Station" />
     </group>
 </menu>
