@@ -7,8 +7,13 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textView_weather_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_margin="10dp"
+        android:layout_marginLeft="26dp"
+        android:text="waiting..."
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 </FrameLayout>

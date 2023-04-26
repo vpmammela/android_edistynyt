@@ -6,17 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.edistynytandroid.databinding.FragmentWeatherStationBinding
-import com.example.edistynytandroid.datatypes.weatherstation.WeatherStation
+import com.example.edistynytandroid.databinding.FragmentRemoteMessageBinding
 import com.google.gson.GsonBuilder
 import com.hivemq.client.mqtt.MqttClient
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient
 import com.hivemq.client.mqtt.mqtt3.message.connect.connack.Mqtt3ConnAck
-import java.util.*
+import kotlin.random.Random
 
 
-class WeatherStationFragment : Fragment() {
-    private var _binding: FragmentWeatherStationBinding? = null
+class RemoteMessageFragment : Fragment() {
+    private var _binding: FragmentRemoteMessageBinding? = null
     private lateinit var client: Mqtt3AsyncClient
 
     private val binding get() = _binding!!
@@ -25,22 +24,31 @@ class WeatherStationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentWeatherStationBinding.inflate(inflater, container, false)
+        _binding = FragmentRemoteMessageBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
 
+        binding.buttonSendRemoteMessage.setOnClickListener {
+            var randomNumber = Random.nextInt(0, 100)
+            var stringPayload = "Hello world " + randomNumber.toString()
+
+            client.publishWith()
+                .topic(BuildConfig.HIVEMQ_TOPIC)
+                .payload(stringPayload.toByteArray())
+                .send()
+        }
         client = MqttClient.builder()
             .useMqttVersion3()
             .sslWithDefaultConfig()
-            .identifier(BuildConfig.MQTT_CLIENT_ID + UUID.randomUUID().toString())
-            .serverHost(BuildConfig.MQTT_BROKER)
+            .identifier("AndroidHiveMQTTtest")
+            .serverHost(BuildConfig.HIVEMQ_BROKER)
             .serverPort(8883)
             .buildAsync()
 
         client.connectWith()
             .simpleAuth()
-            .username(BuildConfig.MQTT_USERNAME)
-            .password(BuildConfig.MQTT_PASSWORD.toByteArray())
+            .username(BuildConfig.HIVEMQ_USERNAME)
+            .password(BuildConfig.HIVEMQ_PASSWORD.toByteArray())
             .applySimpleAuth()
             .send()
             .whenComplete { connAck: Mqtt3ConnAck?, throwable: Throwable? ->
@@ -61,31 +69,20 @@ class WeatherStationFragment : Fragment() {
         _binding = null
         client.disconnect()
     }
-
     fun subscribeToTopic() {
         val gson = GsonBuilder().setPrettyPrinting().create()
 
         client.subscribeWith()
-            .topicFilter(BuildConfig.MQTT_TOPIC)
+            .topicFilter(BuildConfig.HIVEMQ_TOPIC)
             .callback { publish ->
 
-                    // this callback runs everytime your code receives new data payload
-                    var result = String(publish.getPayloadAsBytes())
+                // this callback runs everytime your code receives new data payload
+                var result = String(publish.getPayloadAsBytes())
 
-                    try {
-                    var item : WeatherStation = gson.fromJson(result, WeatherStation::class.java)
-                    Log.d("TESTI", item.d.get1().v.toString() + "C")
-
-                    val temperature = item.d.get1().v
-                    var humidity = item.d.get3().v
-                    var text = "Temperature: ${temperature}°C"
-                        text += "\n"
-                        text += "Humidity: ${humidity}%"
-
-                    activity?.runOnUiThread{
-                        binding.textViewWeatherText.text = text
+                try {
+                    activity?.runOnUiThread {
+                        binding.textViewRemoteMessage.text = result
                     }
-
                 }
                 catch (e: java.lang.Exception) {
                     Log.d("TESTI", e.message.toString())

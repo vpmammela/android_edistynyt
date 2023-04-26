@@ -10,7 +10,7 @@ public class _8 {
 
     @SerializedName("v")
     @Expose
-    private int v;
+    private double v;
 
     /**
      * No args constructor for use in serialization
@@ -23,23 +23,23 @@ public class _8 {
      * 
      * @param v
      */
-    public _8(int v) {
+    public _8(double v) {
         super();
         this.v = v;
     }
 
-    public int getV() {
+    public double getV() {
         return v;
     }
 
-    public void setV(int v) {
+    public void setV(double v) {
         this.v = v;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(_8 .class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(_8 .class.getName()).append('@').append(Double.toHexString(System.identityHashCode(this))).append('[');
         sb.append("v");
         sb.append('=');
         sb.append(this.v);
