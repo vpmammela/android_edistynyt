@@ -1,6 +1,7 @@
 package com.example.edistynytandroid
 
 import android.R
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -75,6 +78,40 @@ class FeedbackReadFragment : Fragment() {
                 binding.listViewFeedbacks.adapter = adapter
                 binding.listViewFeedbacks.setAdapter(adapter)
 
+                binding.listViewFeedbacks.setOnItemClickListener { parent, view, position, id ->
+                    val clickedFeedback: Feedback = parent.getItemAtPosition(position) as Feedback
+                    Log.d("TESTI", "Clicked item id: ${clickedFeedback.id}")
+
+                    val action = FeedbackReadFragmentDirections.actionFeedbackReadFragmentToFeedbackDetailFragment(
+                        clickedFeedback.name.toString(),
+                        clickedFeedback.location.toString(),
+                        clickedFeedback.value.toString(),
+                        clickedFeedback.id.toString(),
+                    )
+                    findNavController().navigate(action)
+
+                }
+
+                binding.listViewFeedbacks.setOnItemLongClickListener { parent, view, position, id ->
+                    val clickedFeedback: Feedback = parent.getItemAtPosition(position) as Feedback
+
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setTitle("Delete Feedback")
+                    builder.setMessage("Are you sure you want to delete this feedback?")
+                    builder.setPositiveButton("Yes") { _, _ ->
+                        deleteFeedback(clickedFeedback.id)
+                        Toast.makeText(requireContext(), "Feedback deleted", Toast.LENGTH_SHORT).show()
+                    }
+                    builder.setNegativeButton("No") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    val dialog = builder.create()
+                    dialog.show()
+
+                    true // return true to indicate that the long click has been handled
+                }
+
+
             },
             Response.ErrorListener {
                 // typically this is a connection error
@@ -100,4 +137,39 @@ class FeedbackReadFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}
+
+    fun deleteFeedback(id: Int?) {
+
+        val JSON_URL = "http://10.0.2.2:8055/items/feedback/${id}?access_token=L_LruBFG3SiZWRFwKTA17XLyC9WnFQAL"
+
+        // Request a string response from the provided URL.
+        val stringRequest: StringRequest = object : StringRequest(
+            Request.Method.DELETE, JSON_URL,
+            Response.Listener { response ->
+
+                Log.d("TESTI", response)
+
+                getFeedbacks()
+
+            },
+            Response.ErrorListener {
+                // typically this is a connection error
+                Log.d("TESTI", it.toString())
+            })
+        {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                // we have to specify a proper header, otherwise Apigility will block our queries!
+                // define we are after JSON data!
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Content-Type"] = "application/json; charset=utf-8"
+                return headers
+            }
+        }
+
+        // Add the request to the RequestQueue. This has to be done in both getting and sending new data.
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
+    }
+    }
