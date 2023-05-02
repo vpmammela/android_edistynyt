@@ -58,13 +58,13 @@ class LocalMqttFragment : Fragment() {
             .sslWithDefaultConfig()
             .identifier("testaaja")
             .serverHost(BuildConfig.LOCAL_MQTT_BROKER)
-            .serverPort(1884)
+            .serverPort(1883)
             .buildAsync()
 
         client.connectWith()
             .simpleAuth()
-            .username(BuildConfig.HIVEMQ_USERNAME)
-            .password(BuildConfig.HIVEMQ_PASSWORD.toByteArray())
+            .username(BuildConfig.LOCAL_MQTT_USERNAME)
+            .password(BuildConfig.LOCAL_MQTT_PASSWORD.toByteArray())
             .applySimpleAuth()
             .send()
             .whenComplete { connAck: Mqtt3ConnAck?, throwable: Throwable? ->
@@ -102,7 +102,6 @@ class LocalMqttFragment : Fragment() {
                 }
                 catch (e: java.lang.Exception) {
                     Log.d("TESTI", e.message.toString())
-                    Log.d("TESTI", "Saattaa olla diagnostiikkadataa")
                 }
             }
             .send()
