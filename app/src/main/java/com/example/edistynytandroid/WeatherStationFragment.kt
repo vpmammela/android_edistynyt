@@ -13,12 +13,14 @@ import com.hivemq.client.mqtt.MqttClient
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient
 import com.hivemq.client.mqtt.mqtt3.message.connect.connack.Mqtt3ConnAck
 import java.util.*
+import android.widget.ProgressBar
 
 
 class WeatherStationFragment : Fragment() {
     private var _binding: FragmentWeatherStationBinding? = null
     private lateinit var client: Mqtt3AsyncClient
-
+    private lateinit var progressBar: ProgressBar
+    private var progressStatus = 0
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +30,11 @@ class WeatherStationFragment : Fragment() {
         _binding = FragmentWeatherStationBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
+        progressBar = binding.progressBar
+        progressBar.progress = 0
+        progressStatus = 0
+        progressBar.max = 50
+        progressBar.min = -50
 
         client = MqttClient.builder()
             .useMqttVersion3()
@@ -85,6 +92,8 @@ class WeatherStationFragment : Fragment() {
                     activity?.runOnUiThread{
                         binding.textViewWeatherText.text = text
                     }
+
+                        binding.progressBar.progress = temperature.toInt()
 
                 }
                 catch (e: java.lang.Exception) {
