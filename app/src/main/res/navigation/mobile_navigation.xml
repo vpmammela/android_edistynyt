@@ -170,4 +170,13 @@
             android:id="@+id/action_feedbackDetailFragment_to_feedbackReadFragment"
             app:destination="@id/feedbackReadFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/localMqttFragment"
+        android:name="com.example.edistynytandroid.LocalMqttFragment"
+        android:label="fragment_local_mqtt"
+        tools:layout="@layout/fragment_local_mqtt" >
+        <action
+            android:id="@+id/action_localMqttFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>

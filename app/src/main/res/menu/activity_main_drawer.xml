@@ -26,6 +26,9 @@
             android:id="@+id/remoteMessageFragment"
             android:title="HiveMQ (harjoitus 4 + lisätehtävä)" />
         <item
+            android:id="@+id/localMqttFragment"
+            android:title="Local MQTT (harjoitus 4.2)" />
+        <item
             android:id="@+id/dataFragment"
             android:title="Data read fragment" />
         <item
