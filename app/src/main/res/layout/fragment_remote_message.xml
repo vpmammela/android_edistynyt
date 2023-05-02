@@ -8,6 +8,16 @@
 
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Received message:"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/textView_remote_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,6 +25,20 @@
         android:text="Waiting..."
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="?android:attr/listDivider" />
+
+    <EditText
+        android:id="@+id/editText_send_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="type your message here..."
+        android:inputType="textShortMessage|textPersonName" />
 
     <Button
         android:id="@+id/button_send_remote_message"

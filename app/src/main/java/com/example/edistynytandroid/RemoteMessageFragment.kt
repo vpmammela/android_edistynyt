@@ -11,7 +11,6 @@ import com.google.gson.GsonBuilder
 import com.hivemq.client.mqtt.MqttClient
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient
 import com.hivemq.client.mqtt.mqtt3.message.connect.connack.Mqtt3ConnAck
-import kotlin.random.Random
 
 
 class RemoteMessageFragment : Fragment() {
@@ -29,14 +28,14 @@ class RemoteMessageFragment : Fragment() {
         val root: View = binding.root
 
         binding.buttonSendRemoteMessage.setOnClickListener {
-            var randomNumber = Random.nextInt(0, 100)
-            var stringPayload = "Hello world " + randomNumber.toString()
-
+            var stringPayload = binding.editTextSendMessage.text.toString()
+            binding.editTextSendMessage.text.clear()
             client.publishWith()
                 .topic(BuildConfig.HIVEMQ_TOPIC)
                 .payload(stringPayload.toByteArray())
                 .send()
         }
+
         client = MqttClient.builder()
             .useMqttVersion3()
             .sslWithDefaultConfig()

@@ -5,17 +5,26 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/toDoDataFragment"
+            android:title="Harjoitus 1" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/mapsFragment"
+            android:title="Google maps (Harjoitus 2)" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/openStreetMapsFragment"
+            android:title="OSM (harjoitus 2 lisätehtävä)" />
+        <item
+            android:id="@+id/feedbackSendFragment"
+            android:title="Feedback Send (harjoitus 3)" />
+        <item
+            android:id="@+id/feedbackReadFragment"
+            android:title="Feedback Read (harjoitus 3 + 3.1,3.2)" />
+        <item
+            android:id="@+id/weatherStationFragment"
+            android:title="Weather Station (harjoitus 4 + lisätehtävä)" />
+        <item
+            android:id="@+id/remoteMessageFragment"
+            android:title="HiveMQ (harjoitus 4 + lisätehtävä)" />
         <item
             android:id="@+id/dataFragment"
             android:title="Data read fragment" />
@@ -23,26 +32,9 @@
             android:id="@+id/commentDataFragment"
             android:title="Comment API" />
         <item
-            android:id="@+id/mapsFragment"
-            android:title="Google maps (Harjoitus 2)" />
-        <item
-            android:id="@+id/toDoDataFragment"
-            android:title="Harjoitus 1" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
 
-        <item
-            android:id="@+id/openStreetMapsFragment"
-            android:title="OSM (harjoitus 2 lisätehtävä)" />
-        <item
-            android:id="@+id/feedbackReadFragment"
-            android:title="Feedback Read (harjoitus 3 + 3.1,3.2)" />
-        <item
-            android:id="@+id/feedbackSendFragment"
-            android:title="Feedback Send (harjoitus 3)" />
-        <item
-            android:id="@+id/weatherStationFragment"
-            android:title="Weather Station" />
-        <item
-            android:id="@+id/remoteMessageFragment"
-            android:title="HiveMQ test" />
     </group>
 </menu>
