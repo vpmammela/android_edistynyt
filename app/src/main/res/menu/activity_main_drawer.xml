@@ -29,6 +29,9 @@
             android:id="@+id/localMqttFragment"
             android:title="Local MQTT (harjoitus 4.2)" />
         <item
+            android:id="@+id/customViewTesterFragment"
+            android:title="Custom View Test" />
+        <item
             android:id="@+id/dataFragment"
             android:title="Data read fragment" />
         <item

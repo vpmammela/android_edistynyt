@@ -179,4 +179,9 @@
             android:id="@+id/action_localMqttFragment_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/customViewTesterFragment"
+        android:name="com.example.edistynytandroid.CustomViewTesterFragment"
+        android:label="fragment_custom_view_tester"
+        tools:layout="@layout/fragment_custom_view_tester" />
 </navigation>
