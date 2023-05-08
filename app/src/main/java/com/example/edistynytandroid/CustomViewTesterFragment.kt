@@ -1,6 +1,7 @@
 package com.example.edistynytandroid
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,20 @@ class CustomViewTesterFragment : Fragment() {
         val root: View = binding.root
 
         binding.speedView.speedTo(35f)
+
+        binding.customTemperatureViewTest.changeTemperature(14)
+
+        binding.buttonChangeTemperature.setOnClickListener {
+            val randomTemperature : Int = (-40..40).random()
+            binding.customTemperatureViewTest.changeTemperature(randomTemperature)
+            Log.d("TESTI", randomTemperature.toString())
+        }
+
+        binding.buttonAddDataTest.setOnClickListener {
+            val randomValue : Int = (1..100).random()
+            binding.latestDataViewTest.addData("Testing " + randomValue.toString())
+        }
+
 
         return root
     }

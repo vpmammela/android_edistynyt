@@ -30,7 +30,7 @@
             android:title="Local MQTT (harjoitus 4.2)" />
         <item
             android:id="@+id/customViewTesterFragment"
-            android:title="Custom View Test" />
+            android:title="Custom View (harjoitus 5.2)" />
         <item
             android:id="@+id/dataFragment"
             android:title="Data read fragment" />

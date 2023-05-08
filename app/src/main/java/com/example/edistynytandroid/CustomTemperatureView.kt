@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 
@@ -16,15 +17,41 @@ class CustomTemperatureView @JvmOverloads constructor(
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
+    private var temperature : Int = 0
 
+    fun changeTemperature(temp: Int) {
+        temperature = temp
+
+        if(temperature > 20) {
+            paint.color = Color.RED
+            textPaint.color = Color.WHITE
+        } else if (temperature > 10) {
+            paint.color = Color.rgb(255, 165, 0)
+            textPaint.color = Color.WHITE
+        } else if (temperature > -10) {
+            paint.color = Color.YELLOW
+            textPaint.color = Color.BLACK
+        } else if (temperature > -20) {
+            paint.color = Color.CYAN
+            textPaint.color = Color.BLACK
+        } else {
+            paint.color = Color.BLUE
+            textPaint.color = Color.WHITE
+        }
+
+        // android ei oletuksena piirrä custom viewiä uusiksi
+        invalidate()
+        requestLayout()
+    }
     init
     {
         // this is constructor of your component
         // all initializations go here
         paint.color = Color.BLUE
         textPaint.color = Color.WHITE
-        textPaint.textSize = 70f
+        textPaint.textSize = 90f
         textPaint.textAlign = Paint.Align.CENTER
+        textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD))
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -35,12 +62,12 @@ class CustomTemperatureView @JvmOverloads constructor(
         canvas.drawCircle(width.toFloat() / 2, width.toFloat() / 2, width.toFloat() / 2, paint)
 
         // parameters: content, x, y, color
-        canvas.drawText("Test!", width.toFloat() / 2, width.toFloat() / 2 + 25, textPaint);
+        canvas.drawText("${temperature}°C", width.toFloat() / 2, width.toFloat() / 2 + 25, textPaint);
         // here you can do all the drawing
     }
 
 
-    val size = 200
+    val size = 150
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         // Try for a width based on our minimum

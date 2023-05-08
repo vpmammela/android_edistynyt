@@ -13,15 +13,34 @@
         app:sv_minSpeed="-50"
         app:sv_maxSpeed="50"
         app:sv_unit="°C"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp" />
+        android:layout_margin="10dp" />
 
     <com.example.edistynytandroid.CustomTemperatureView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_margin="20dp">
+        android:id="@+id/customTemperatureView_test"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_margin="10dp">
 
     </com.example.edistynytandroid.CustomTemperatureView>
+
+    <Button
+        android:id="@+id/button_change_temperature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="change temperature" />
+
+    <com.example.edistynytandroid.LatestDataView
+        android:id="@+id/latest_data_view_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/customborder" />
+
+    <Button
+        android:id="@+id/button_add_data_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add data" />
 
 </LinearLayout>
