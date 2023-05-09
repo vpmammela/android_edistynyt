@@ -1,5 +1,6 @@
 package com.example.edistynytandroid
 
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient
 import com.hivemq.client.mqtt.mqtt3.message.connect.connack.Mqtt3ConnAck
 import java.util.*
 import android.widget.ProgressBar
+import androidx.core.view.isVisible
 
 
 class WeatherStationFragment : Fragment() {
@@ -22,6 +24,8 @@ class WeatherStationFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private var progressStatus = 0
     private val binding get() = _binding!!
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -80,20 +84,26 @@ class WeatherStationFragment : Fragment() {
                     var result = String(publish.getPayloadAsBytes())
 
                     try {
-                    var item : WeatherStation = gson.fromJson(result, WeatherStation::class.java)
-                    Log.d("TESTI", item.d.get1().v.toString() + "C")
-
-                    val temperature = item.d.get1().v
-                    var humidity = item.d.get3().v
-                    var text = "Temperature: ${temperature}°C"
+                        var item : WeatherStation = gson.fromJson(result, WeatherStation::class.java)
+                        Log.d("TESTI", item.d.get1().v.toString() + "C")
+                        val sdf = SimpleDateFormat("HH:mm:ss")
+                        val currentDate = sdf.format(Date())
+                        val temperature = item.d.get1().v
+                        var humidity = item.d.get3().v
+                        var text = "Temperature: ${temperature}°C"
                         text += "\n"
                         text += "Humidity: ${humidity}%"
 
-                    activity?.runOnUiThread{
-                        binding.textViewWeatherText.text = text
-                    }
+                        activity?.runOnUiThread{
+                            binding.wave.isVisible = false
+                            binding.textViewWeatherText.text = text
+
+                            var dataText : String = "${currentDate} - Temperature: ${temperature}℃ - Humidity: ${humidity}%"
+                            binding.latestDataViewTest.addData(dataText)
+                        }
 
                         binding.progressBar.progress = temperature.toInt()
+
 
                 }
                 catch (e: java.lang.Exception) {
