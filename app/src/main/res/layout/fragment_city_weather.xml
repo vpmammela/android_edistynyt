@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context=".CityWeatherFragment">
+    tools:context=".ui.cityWeather.CityWeatherFragment">
 
     <TextView
         android:id="@+id/textView_weather_city_name"

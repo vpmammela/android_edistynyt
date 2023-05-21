@@ -1,5 +1,6 @@
-package com.example.edistynytandroid
+package com.example.edistynytandroid.ui.cityWeather
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,12 +13,12 @@ import androidx.navigation.fragment.navArgs
 import com.example.edistynytandroid.databinding.FragmentCityWeatherBinding
 
 
-
 class CityWeatherFragment : Fragment() {
     private var _binding: FragmentCityWeatherBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: CityWeatherViewModel
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

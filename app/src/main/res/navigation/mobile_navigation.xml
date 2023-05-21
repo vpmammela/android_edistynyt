@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/cityWeatherFragment"
-        android:name="com.example.edistynytandroid.CityWeatherFragment"
+        android:name="com.example.edistynytandroid.ui.cityWeather.CityWeatherFragment"
         android:label="fragment_city_weather"
         tools:layout="@layout/fragment_city_weather" >
         <argument

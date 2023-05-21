@@ -1,4 +1,4 @@
-package com.example.edistynytandroid
+package com.example.edistynytandroid.ui.cityWeather
 
 data class CityWeather(
     val name: String?,

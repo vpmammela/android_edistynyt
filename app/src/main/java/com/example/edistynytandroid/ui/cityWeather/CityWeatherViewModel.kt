@@ -1,4 +1,4 @@
-package com.example.edistynytandroid
+package com.example.edistynytandroid.ui.cityWeather
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,6 +10,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.edistynytandroid.BuildConfig
 import com.google.gson.GsonBuilder
 
 class CityWeatherViewModel : ViewModel() {
